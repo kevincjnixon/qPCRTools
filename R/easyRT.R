@@ -42,7 +42,7 @@ easyRT<-function(infile=NULL, title=NULL, refGene=NULL, delim=NULL, refCond=NULL
   dat$Ct<-as.numeric(dat$Ct)
   #Group data into triplicates to check standard deviation
   if(is.null(std)){
-    std<-as.numeric(readline(prompt="Please enter a standard deviation threshold of Ct to filter outlying wells (recommended 0.3; enter 1 if no wells to be filtered):"))
+    std<-as.numeric(readline(prompt="Please enter a standard deviation threshold of Ct to filter outlying wells (recommended 0.3):"))
   }
   message("Filtering wells based on a standard deviation of Ct of: ", std)
   y<-plyr::ddply(dat, c("Sample","Detector"), .fun=sdFilter, "Ct", std)
