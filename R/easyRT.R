@@ -85,18 +85,38 @@ easyRT<-function(infile=NULL, title=NULL, refGene=NULL, delim=NULL, refCond=NULL
   #Now we have the controls, let's run the ddCT
   res<-ddCT(y, refGene, refCond, avg, delim)
   x<-res$res %>% dplyr::group_by(Detector)
-
+  x$Condition<-factor(x$Condition)
+  x$Condition<-relevel(x$Condition, refCond)
   #Run pairwise comparisons using forStat things (need to log2 transform)
   forStat<-res$forStat
+  forStat$Condition<-relevel(forStat$Condition, refCond)
   forStat$comp<-paste(forStat$Detector, forStat$Condition, sep="_")
+  forStat$comp<-factor(forStat$comp)
+  forStat$comp<-relevel(forStat$comp, grep(refCond, levels(forStat$comp)))
   forStat$dCt<- log2(forStat$dCt)*-1
   comps<-list()
-  i<-1
-  index<-1
-  while(i < length(levels(as.factor(forStat$comp)))){
-    comps[[index]]<-c(as.character(levels(as.factor(forStat$comp))[i]), as.character(levels(as.factor(forStat$comp))[i+1]))
-    i<-i+2
-    index<-index+1
+  #If there is only two conditions (i.e. one comparison per gene):
+  if(length(levels(forStat$Condition))<3){
+    i<-1
+    index<-1
+    while(i < length(levels(forStat$comp))){
+      comps[[index]]<-c(as.character(levels(forStat$comp)[i]), as.character(levels(forStat$comp)[i+1]))
+      i<-i+2
+      index<-index+1
+    }
+  } else {
+    #Run pairwise comparisons for each condition to refCond
+    i<-1
+    index<-1
+    while(i < length(levels(forStat$comp))){
+      for(k in 1:length(levels(forStat$Condition))){
+        if(k<length(levels(forStat$Condition))){
+          comps[[index]]<-c(as.character(levels(forStat$comp)[i]), as.character(levels(forStat$comp)[i+k]))
+          index<-index+1
+        }
+      }
+      i<-i+length(levels(forStat$comp))
+    }
   }
   pwc<-forStat %>% rstatix::pairwise_t_test(dCt ~ comp, comparisons=comps, p.adjust.method="BH")
   #pwc<- pwc %>% rstatix::add_xy_position(x="comp")
@@ -197,19 +217,24 @@ ddCT<-function(dat, refGene, refCond, avg, delim){
     #print(x[[mean]][which(x[[gene]] %in% refGene)])
     #dmean subtracts avg mean of test gene in rep from control gene in rep
     res<-NULL
-    if(length(refGene<2)){
-    res<-data.frame(Detector=x[[gene]],
-                    dCt=2^-(x[[mean]]-x[[mean]][which(x[[gene]] %in% refGene)]),
-                    #sd=(x[[sd]]^2 + (x[[sd]][which(x[[gene]] %in% refGene)])^2)^0.5,
-                    Condition=x$Condition,
-                    rep=x$rep)
-    #any dCt of 0, turn to NA and remove
-  } else {
-    res<-data.frame(Detector=x[[gene]],
-                    dCt=2^-(x[[mean]]-geoMean(x[[mean]][which(x[[gene]] %in% refGene)])),
-                    Condition=x$Condition,
-                    rep=x$rep)
-  }
+    if(length(refGene)<2){
+      message("Only 1 reference gene...")
+      res<-data.frame(Detector=x[[gene]],
+                      dCt=2^-(x[[mean]]-x[[mean]][which(x[[gene]] %in% refGene)]),
+                      #sd=(x[[sd]]^2 + (x[[sd]][which(x[[gene]] %in% refGene)])^2)^0.5,
+                      Condition=x$Condition,
+                      rep=x$rep)
+      #any dCt of 0, turn to NA and remove
+    } else {
+      message(length(refGene)," reference genes...")
+      gm<-geoMean(x[[mean]][which(x[[gene]] %in% refGene)])
+      res<-data.frame(Detector=x[[gene]],
+                      dCt=2^-(x[[mean]]-gm),
+                      Condition=x$Condition,
+                      rep=x$rep)
+      #Now set the reference genes to 1, so we can elminate them in the next line
+      res$dCt[which(res$Detector %in% refGene)]<-1
+    }
     res$dCt[res$dCt==1]<-NA
     res<-res[complete.cases(res),]
     #res$sd<-sd(res$dCt)
