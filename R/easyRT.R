@@ -13,17 +13,26 @@
 #' @param avg Character indicating the averaging method ('geoMean', or 'mean'). Leave NULL to choose interactively.
 #' @param writeOut Character ("Y"/"N") indicating if results are to be written out to csv. Leave NULL to choose interactively.
 #' @param col Character indicating the RColorBrewer palette for colour scheme. Default is "Dark2".
+#' @param showStat Boolean indicating if statistics are to be shown. Default is TRUE.
+#' @param showEB Boolean indicating if error bars are to be showns. Default is TRUE.
 #' @return data.frame object with relative expression values and a bar plot depicting relative expression
 #' @export
 #'
 easyRT<-function(infile=NULL, title=NULL, refGene=NULL, delim=NULL, refCond=NULL,
-                 method="ddCt", std=NULL, avg=NULL, writeOut=NULL, col="Dark2"){
+                 method="ddCt", std=NULL, avg=NULL, writeOut=NULL, col="Dark2",
+                 showStat=T, showEB=T){
   require(dplyr, quietly=T)
   #Check for the input file:
   if(is.null(infile)){
     infile<-file.choose()
   }
-  dat<-read.delim(infile, skip=10)[,c(1:6)] #Change according to file format
+  dat<-NULL
+  form<-as.character(readline(prompt="Is this bioRad data without header? [Y/N]"))
+  if(form=="Y" || form=="y"){
+    dat<-bioRadImport(infile)
+  } else {
+    dat<-read.delim(infile, skip=10)[,c(1:6)] #Change according to file format
+  }
   #Change empt characters to NA
   dat[(dat=="")]<-NA
   dat<-dat[complete.cases(dat),]
@@ -39,7 +48,7 @@ easyRT<-function(infile=NULL, title=NULL, refGene=NULL, delim=NULL, refCond=NULL
   y<-plyr::ddply(dat, c("Sample","Detector"), .fun=sdFilter, "Ct", std)
   message(nrow(dat)-nrow(y)," wells removed to reduce standard deviation...")
   if(is.null(delim)){
-    print(head(y$Sample))
+    print(head(levels(as.factor(y$Sample))))
     delim<-as.character(readline(prompt="Please enter the delimiter separating Condition from Replicate (if space, leave blank):"))
     if(delim==""){
       delim<- " "
@@ -106,13 +115,17 @@ easyRT<-function(infile=NULL, title=NULL, refGene=NULL, delim=NULL, refCond=NULL
   }
   p<-ggplot2::ggplot(x, ggplot2::aes(x=Detector,y=ddCt, fill=Condition))+
     ggplot2::geom_bar(stat="identity", color="black", position=ggplot2::position_dodge())+
-    ggplot2::geom_errorbar(ggplot2::aes(ymin=ddCt-sd, ymax=ddCt+sd), width=.2, position=ggplot2::position_dodge(0.9)) +
     ggplot2::labs(title=title, y="Relative Gene Expression", x="Gene") +
     ggplot2::theme_minimal() + ggplot2::theme(axis.text=ggplot2::element_text(angle=60, hjust=1))+
-    ggplot2::scale_fill_brewer(palette=col) +
-    ggpubr::stat_pvalue_manual(pwc, label="p.adj.signif",
+    ggplot2::scale_fill_brewer(palette=col)
+  if(isTRUE(showEB)){
+    p <- p + ggplot2::geom_errorbar(ggplot2::aes(ymin=ddCt-sd, ymax=ddCt+sd), width=.2, position=ggplot2::position_dodge(0.9))
+  }
+  if(isTRUE(showStat)){
+    p<- p + ggpubr::stat_pvalue_manual(pwc, label="p.adj.signif",
                                tip.length=0, step.increase=0,
                                x="Detector", y="y", inherit.aes=F)
+  }
   print(p + ggplot2::geom_hline(yintercept=1, linetype="dashed"))
   #return(res)
   if(is.null(writeOut)){
@@ -252,3 +265,9 @@ ddCT<-function(dat, refGene, refCond, avg, delim){
   return(list(forStat=step2, res=step3, step1=step1))
 }
 
+bioRadImport<-function(filename){
+  #Import bioRad formatted data and reformat it to be consistent with the format of easyRT function
+  dat<-read.delim(filename)[,c(1,2,5,3,4,7)]
+  colnames(dat)<-c("Position","Flag","Sample","Detector","Task","Ct")
+  return(dat)
+}

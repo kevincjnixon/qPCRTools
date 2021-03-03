@@ -14,7 +14,9 @@ easyRT(
   std = NULL,
   avg = NULL,
   writeOut = NULL,
-  col = "Dark2"
+  col = "Dark2",
+  showStat = T,
+  showEB = T
 )
 }
 \arguments{
@@ -37,6 +39,10 @@ easyRT(
 \item{writeOut}{Character ("Y"/"N") indicating if results are to be written out to csv. Leave NULL to choose interactively.}
 
 \item{col}{Character indicating the RColorBrewer palette for colour scheme. Default is "Dark2".}
+
+\item{showStat}{Boolean indicating if statistics are to be shown. Default is TRUE.}
+
+\item{showEB}{Boolean indicating if error bars are to be showns. Default is TRUE.}
 }
 \value{
 data.frame object with relative expression values and a bar plot depicting relative expression
