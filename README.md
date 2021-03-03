@@ -57,3 +57,6 @@ There can be more columns, but it is necessary to have these columns in this ord
 Note that 'Sample' in both cases is in the format 'Condition*delimiter*replicate' (i.e. WT is the condition, '-' is the delimiter, and 1 is the replicate)
 
 There should be technical triplicates for each gene and each condition/replicate, and at least two biological replicates per condition.
+
+
+**More Functions to come later (dilution series, and %input for ChIP-qPCR)**
