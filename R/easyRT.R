@@ -92,7 +92,9 @@ easyRT<-function(infile=NULL, title=NULL, refGene=NULL, delim=NULL, refCond=NULL
   forStat$Condition<-relevel(forStat$Condition, refCond)
   forStat$comp<-paste(forStat$Detector, forStat$Condition, sep="_")
   forStat$comp<-factor(forStat$comp)
-  forStat$comp<-relevel(forStat$comp, grep(refCond, levels(forStat$comp)))
+  if(length(levels(forStat$Condition))>2){
+    forStat$comp<-relevel(forStat$comp, grep(refCond, levels(forStat$comp)))
+  }
   forStat$dCt<- log2(forStat$dCt)*-1
   comps<-list()
   #If there is only two conditions (i.e. one comparison per gene):
