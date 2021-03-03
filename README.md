@@ -59,4 +59,11 @@ Note that 'Sample' in both cases is in the format 'Condition*delimiter*replicate
 There should be technical triplicates for each gene and each condition/replicate, and at least two biological replicates per condition.
 
 
+**Don't like the colour scheme?**
+Google 'RColorBrewer palettes' to look for character codes of various colour schemes. Default is 'Dark2'.  Change colour using the 'col' option:
+
+```{r}
+easyRT(col="Spectral")
+```
+
 **More Functions to come later (dilution series, and %input for ChIP-qPCR)**
