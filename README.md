@@ -17,10 +17,10 @@ easyRT(showEB=F, showStat=F) #Run interactively, but don't plot error bars (show
 ```
 
 When running interactively:
-1. File browser will pop up, choose text-delimited file to analyze
+1. File browser will pop up, choose tab-delimited file to analyze
 2. You will be prompted if this is 'bioRad' input, enter Y/N (see below for details)
 3. Select a standard deviation threshold to filter Ct values (if SD of triplicates is greater than this threshold, an outlier will be selected and removed from analysis)
-4. Levels of sample indicators will appear. You should use format 'Condition*delim*Replicate' in your setup. Indicate what *delim* is. Leave black if it is a space.
+4. Levels of sample indicators will appear. You should use format 'Condition*delim*Replicate' in your setup. Indicate what *delim* is. Leave blank if it is a space.
 5. Select your reference condition
 6. Indicate how many reference genes you used (at least 1). More than 1 reference gene will use geoMean of Ct values of those genes for reference.
 7. Indicate your reference gene(s)
@@ -32,6 +32,32 @@ When running interactively:
   b. if N, you're done
 
 Plot will be produced with showing conditions as colours on bars, plotting genes on x-axis and relative gene expression (delta-delta Ct method) on y-axis. Error bars are SEM (if showEB=T; default). Stats are from Benjamini-Hochberg-corrected pairwise-t-tests (if showStat=T; default).
+
+
+Usage - Percent Input method
+*Note that this method at the moment does not assume biological replicates, and so no stats/error bars will appear on the graph*
+
+```{r}
+library(qPCRTools)
+easyPI() #Run interactively
+```
+
+When running interactively:
+1. File browser will pop up, choose tab-delimited file to analyze
+2. You will be prompted if this is 'bioRad' input, enter Y/N (see below for details)
+3. Select a standard deviation threshold to filter Ct values (if SD of triplicates is greater than this threshold, an outlier will be selected and removed from analysis)
+4. Indicate the dilution of the input for the ChIP-qPCR as a percentage. For example, a 1:10 dilution is 10%, enter 10. Another example: 1:20 dilution is 5%, enter 5.
+5. Levels of sample indicators will appear. You should use the format 'Condition*delim*IP' or 'IP*delim*Condition' in your setup. Where 'Condition' is you sample condition (e.g. 'control', 'KO') and IP is the protein your 'ChIP-ing' (or input). Indicat what *delim* is. Leave blank if it is a space.
+6. Indicate the order in which Condition and IP appear in your setup. Choose a number indicating where 'Condition' appears in your setup. Then choose a number indicating where 'IP' appears in your setup.
+7. Indicate the reference condition (e.g. "Control")
+8. Indicate which 'IP' represents the input.
+9. Indicate how you want to average Ct values (geoMean = geometric mean or mean)
+10. Enter a title for your plot.
+11. Indicate if you want the results written to a csv file (Y/N)
+  a. if 'Y' enter a filename (ending in .csv) for results to be written
+12. Indicate if you want the results returned to the console (Y/N) (run as t<-easyPI() to save results as an R object 't')
+
+A plot will be produced shoing conditions as colours on bars, plotting the genes and IPs on the x-axis and percent input on the y-axis. At the moment, no error bars or stats will be provided.
 
 Setup for data input:
 Tab-delimited files output from qPCR machine.
@@ -64,6 +90,7 @@ Google 'RColorBrewer palettes' to look for character codes of various colour sch
 
 ```{r}
 easyRT(col="Spectral")
+easyPI(col="Set2")
 ```
 
-**More Functions to come later (dilution series, and %input for ChIP-qPCR)**
+**More Functions to come later (dilution series)**
