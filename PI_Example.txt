@@ -1,0 +1,395 @@
+SDS 2.3	Absolute QuantificationResults	1																			
+Filename	Example Percent Input																				
+PlateID																					
+Assay Type	Absolute Quantification																				
+Run DateTime	03/18/21 12:00:00 PM																				
+Operator																					
+ThermalCycleParams																					
+																					
+Sample Information																					
+																					
+Position	Flag	Sample	Detector	Task	Ct	Ct Median	Quantity	Qty mean	Qty stddev	FOS	HMD	LME	EW	BPR	NAW	HNS	HRN	EAF	BAF	TAF	CAF
+A1	Passed	Input Control	Gene1	Unknown	22.832926																
+A2	Passed	Input Control	Gene1	Unknown	22.480509																
+A3	Passed	Input Control	Gene1	Unknown	22.477428																
+A4	Passed	IgG Control	Gene1	Unknown	33.282066																
+A5	Passed	IgG Control	Gene1	Unknown	32.89995																
+A6	Passed	IgG Control	Gene1	Unknown	33.755444																
+A7	Passed	Protein1 Control	Gene1	Unknown	29.37562																
+A8	Passed	Protein1 Control	Gene1	Unknown	29.35412																
+A9	Passed	Protein1 Control	Gene1	Unknown	29.65894																
+A10	Passed	Protein2 Control	Gene1	Unknown	27.45864																
+A11	Passed	Protein2 Control	Gene1	Unknown	28.02315																
+A12	Passed	Protein2 Control	Gene1	Unknown	27.65429																
+A13	Passed	Input KO	Gene1	Unknown	22.73459																
+A14	Passed	Input KO	Gene1	Unknown	22.751593																
+A15	Passed	Input KO	Gene1	Unknown	22.76183																
+A16	Passed	IgG KO	Gene1	Unknown	33.77192																
+A17	Passed	IgG KO	Gene1	Unknown	32.946568																
+A18	Passed	IgG KO	Gene1	Unknown	32.598015																
+A19	Passed	Protein1 KO	Gene1	Unknown	28.707735																
+A20	Passed	Protein1 KO	Gene1	Unknown	29.175262																
+A21	Passed	Protein1 KO	Gene1	Unknown	29.256691																
+A22	Passed	Protein2 KO	Gene1	Unknown	30.12345																
+A23	Passed	Protein2 KO	Gene1	Unknown	30.26451																
+A24	Passed	Protein2 KO	Gene1	Unknown	30.65423																
+B1	Passed	Input Control	Gene2	Unknown	24.56242																
+B2	Passed	Input Control	Gene2	Unknown	24.49488																
+B3	Passed	Input Control	Gene2	Unknown	24.578463																
+B4	Passed	IgG Control	Gene2	Unknown	34.44331																
+B5	Passed	IgG Control	Gene2	Unknown	35.963985																
+B6	Passed	IgG Control	Gene2	Unknown	35.902264																
+B7	Passed	Protein1 Control	Gene2	Unknown	30.21302																
+B8	Passed	Protein1 Control	Gene2	Unknown	30.50231																
+B9	Passed	Protein1 Control	Gene2	Unknown	30.52321																
+B10	Passed	Protein2 Control	Gene2	Unknown	29.45123																
+B11	Passed	Protein2 Control	Gene2	Unknown	29.32154																
+B12	Passed	Protein2 Control	Gene2	Unknown	29.22562																
+B13	Passed	Input KO	Gene2	Unknown	24.639957																
+B14	Passed	Input KO	Gene2	Unknown	24.725012																
+B15	Passed	Input KO	Gene2	Unknown	24.689852																
+B16	Passed	IgG KO	Gene2	Unknown	34.32105																
+B17	Passed	IgG KO	Gene2	Unknown	34.208122																
+B18	Passed	IgG KO	Gene2	Unknown	34.318146																
+B19	Passed	Protein1 KO	Gene2	Unknown	26.12645																
+B20	Passed	Protein1 KO	Gene2	Unknown	26.32154																
+B21	Passed	Protein1 KO	Gene2	Unknown	28.32165																
+B22	Passed	Protein2 KO	Gene2	Unknown	29.32156																
+B23	Passed	Protein2 KO	Gene2	Unknown	29.36521																
+B24	Passed	Protein2 KO	Gene2	Unknown	28.97865																
+C1	Passed	Input Control	Gene3	Unknown	24.07228																
+C2	Passed	Input Control	Gene3	Unknown	23.952278																
+C3	Passed	Input Control	Gene3	Unknown	24.032291																
+C4	Passed	IgG Control	Gene3	Unknown	35.626514																
+C5	Passed	IgG Control	Gene3	Unknown	35.945637																
+C6	Passed	IgG Control	Gene3	Unknown	35.548473																
+C7	Passed	Protein1 Control	Gene3	Unknown	29.63215																
+C8	Passed	Protein1 Control	Gene3	Unknown	29.56231																
+C9	Passed	Protein1 Control	Gene3	Unknown	29.45685																
+C10	Passed	Protein2 Control	Gene3	Unknown	27.36425																
+C11	Flagged	Protein2 Control	Gene3	Unknown	27.65231																
+C12	Passed	Protein2 Control	Gene3	Unknown	27.45624																
+C13	Passed	Input KO	Gene3	Unknown	24.18759																
+C14	Passed	Input KO	Gene3	Unknown	24.442266																
+C15	Passed	Input KO	Gene3	Unknown	24.14704																
+C16	Passed	IgG KO	Gene3	Unknown	33.847046																
+C17	Passed	IgG KO	Gene3	Unknown	34.235203																
+C18	Passed	IgG KO	Gene3	Unknown	35.03842																
+C19	Passed	Protein1 KO	Gene3	Unknown	31.15642																
+C20	Passed	Protein1 KO	Gene3	Unknown	31.26542																
+C21	Passed	Protein1 KO	Gene3	Unknown	31.111246																
+C22	Passed	Protein2 KO	Gene3	Unknown	30.12032																
+C23	Passed	Protein2 KO	Gene3	Unknown	30.21325																
+C24	Passed	Protein2 KO	Gene3	Unknown	30.86532																
+D1	Passed	Input Control	Gene4	Unknown	25.547495																
+D2	Passed	Input Control	Gene4	Unknown	25.371313																
+D3	Passed	Input Control	Gene4	Unknown	25.350092																
+D4	Passed	IgG Control	Gene4	Unknown	35.167732																
+D5	Passed	IgG Control	Gene4	Unknown	36.44397																
+D6	Passed	IgG Control	Gene4	Unknown	34.959236																
+D7	Passed	Protein1 Control	Gene4	Unknown	27.31564																
+D8	Passed	Protein1 Control	Gene4	Unknown	27.65234																
+D9	Passed	Protein1 Control	Gene4	Unknown	27.42651																
+D10	Passed	Protein2 Control	Gene4	Unknown	30.21356																
+D11	Passed	Protein2 Control	Gene4	Unknown	30.63254																
+D12	Passed	Protein2 Control	Gene4	Unknown	30.53211																
+D13	Passed	Input KO	Gene4	Unknown	25.484034																
+D14	Passed	Input KO	Gene4	Unknown	25.365395																
+D15	Passed	Input KO	Gene4	Unknown	25.319923																
+D16	Passed	IgG KO	Gene4	Unknown	34.377327																
+D17	Passed	IgG KO	Gene4	Unknown	35.94832																
+D18	Passed	IgG KO	Gene4	Unknown	35.93627																
+D19	Passed	Protein1 KO	Gene4	Unknown	29.45612																
+D20	Passed	Protein1 KO	Gene4	Unknown	29.65423																
+D21	Passed	Protein1 KO	Gene4	Unknown	29.45123																
+D22	Passed	Protein2 KO	Gene4	Unknown	31.23156																
+D23	Passed	Protein2 KO	Gene4	Unknown	31.32564																
+D24	Passed	Protein2 KO	Gene4	Unknown	31.78956																
+E1		E1																			
+E2		E2																			
+E3		E3																			
+E4		E4																			
+E5		E5																			
+E6		E6																			
+E7		E7																			
+E8		E8																			
+E9		E9																			
+E10		E10																			
+E11		E11																			
+E12		E12																			
+E13		E13																			
+E14		E14																			
+E15		E15																			
+E16		E16																			
+E17		E17																			
+E18		E18																			
+E19		E19																			
+E20		E20																			
+E21		E21																			
+E22		E22																			
+E23		E23																			
+E24		E24																			
+F1		F1																			
+F2		F2																			
+F3		F3																			
+F4		F4																			
+F5		F5																			
+F6		F6																			
+F7		F7																			
+F8		F8																			
+F9		F9																			
+F10		F10																			
+F11		F11																			
+F12		F12																			
+F13		F13																			
+F14		F14																			
+F15		F15																			
+F16		F16																			
+F17		F17																			
+F18		F18																			
+F19		F19																			
+F20		F20																			
+F21		F21																			
+F22		F22																			
+F23		F23																			
+F24		F24																			
+G1		G1													TRUE			TRUE			
+G2		G2																			
+G3		G3																			
+G4		G4																			
+G5		G5																			
+G6		G6																			
+G7		G7																			
+G8		G8																			
+G9		G9																			
+G10		G10																			
+G11		G11																			
+G12		G12																			
+G13		G13																			
+G14		G14																			
+G15		G15																			
+G16		G16																			
+G17		G17																			
+G18		G18																			
+G19		G19																			
+G20		G20																			
+G21		G21																			
+G22		G22																			
+G23		G23																			
+G24		G24																			
+H1		H1																			
+H2		H2																			
+H3		H3																			
+H4		H4																			
+H5		H5																			
+H6		H6																			
+H7		H7																			
+H8		H8																			
+H9		H9																			
+H10		H10																			
+H11		H11																			
+H12		H12																			
+H13		H13																			
+H14		H14																			
+H15		H15																			
+H16		H16																			
+H17		H17																			
+H18		H18																			
+H19		H19																			
+H20		H20																			
+H21		H21																			
+H22		H22																			
+H23		H23																			
+H24		H24																			
+I1		I1																			
+I2		I2																			
+I3		I3																			
+I4		I4																			
+I5		I5																			
+I6		I6																			
+I7		I7																			
+I8		I8																			
+I9		I9																			
+I10		I10																			
+I11		I11																			
+I12		I12																			
+I13		I13																			
+I14		I14																			
+I15		I15																			
+I16		I16																			
+I17		I17																			
+I18		I18																			
+I19		I19																			
+I20		I20																			
+I21		I21																			
+I22		I22																			
+I23		I23																			
+I24		I24																			
+J1		J1																			
+J2		J2																			
+J3		J3																			
+J4		J4																			
+J5		J5																			
+J6		J6																			
+J7		J7																			
+J8		J8																			
+J9		J9																			
+J10		J10																			
+J11		J11																			
+J12		J12																			
+J13		J13																			
+J14		J14																			
+J15		J15																			
+J16		J16																			
+J17		J17																			
+J18		J18																			
+J19		J19																			
+J20		J20																			
+J21		J21																			
+J22		J22																			
+J23		J23																			
+J24		J24																			
+K1		K1																			
+K2		K2																			
+K3		K3																			
+K4		K4																			
+K5		K5																			
+K6		K6																			
+K7		K7																			
+K8		K8																			
+K9		K9																			
+K10		K10																			
+K11		K11																			
+K12		K12																			
+K13		K13																			
+K14		K14																			
+K15		K15																			
+K16		K16																			
+K17		K17																			
+K18		K18																			
+K19		K19																			
+K20		K20																			
+K21		K21																			
+K22		K22																			
+K23		K23																			
+K24		K24																			
+L1		L1																			
+L2		L2																			
+L3		L3																			
+L4		L4																			
+L5		L5																			
+L6		L6																			
+L7		L7																			
+L8		L8																			
+L9		L9																			
+L10		L10																			
+L11		L11																			
+L12		L12																			
+L13		L13																			
+L14		L14																			
+L15		L15																			
+L16		L16																			
+L17		L17																			
+L18		L18																			
+L19		L19																			
+L20		L20																			
+L21		L21																			
+L22		L22																			
+L23		L23																			
+L24		L24																			
+M1		M1																			
+M2		M2																			
+M3		M3																			
+M4		M4																			
+M5		M5																			
+M6		M6																			
+M7		M7																			
+M8		M8																			
+M9		M9																			
+M10		M10																			
+M11		M11																			
+M12		M12																			
+M13		M13																			
+M14		M14																			
+M15		M15																			
+M16		M16																			
+M17		M17																			
+M18		M18																			
+M19		M19																			
+M20		M20																			
+M21		M21																			
+M22		M22																			
+M23		M23																			
+M24		M24																			
+N1		N1																			
+N2		N2																			
+N3		N3																			
+N4		N4																			
+N5		N5																			
+N6		N6																			
+N7		N7																			
+N8		N8																			
+N9		N9																			
+N10		N10																			
+N11		N11																			
+N12		N12																			
+N13		N13																			
+N14		N14																			
+N15		N15																			
+N16		N16																			
+N17		N17																			
+N18		N18																			
+N19		N19																			
+N20		N20																			
+N21		N21																			
+N22		N22																			
+N23		N23																			
+N24		N24																			
+O1		O1																			
+O2		O2																			
+O3		O3																			
+O4		O4																			
+O5		O5																			
+O6		O6																			
+O7		O7																			
+O8		O8																			
+O9		O9																			
+O10		O10																			
+O11		O11																			
+O12		O12																			
+O13		O13																			
+O14		O14																			
+O15		O15																			
+O16		O16																			
+O17		O17																			
+O18		O18																			
+O19		O19																			
+O20		O20																			
+O21		O21																			
+O22		O22																			
+O23		O23																			
+O24		O24																			
+P1		P1																			
+P2		P2																			
+P3		P3																			
+P4		P4																			
+P5		P5																			
+P6		P6																			
+P7		P7																			
+P8		P8																			
+P9		P9																			
+P10		P10																			
+P11		P11																			
+P12		P12																			
+P13		P13																			
+P14		P14																			
+P15		P15																			
+P16		P16																			
+P17		P17																			
+P18		P18																			
+P19		P19																			
+P20		P20																			
+P21		P21																			
+P22		P22																			
+P23		P23																			
+P24		P24																			
