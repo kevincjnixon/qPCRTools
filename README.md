@@ -1,6 +1,8 @@
 # qPCRTools
 R package to help analyze qPCR data
 
+Example Files are available to download above ("ddCT_Example.txt" and "PI_Example.txt"). These files represent example setups of qPCR data and can be run using qPCRTools. Ct values are made up and may not be representative of expected results.
+
 Installation
 
 ```{r}
