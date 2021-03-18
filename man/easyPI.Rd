@@ -26,7 +26,7 @@ easyPI(
 
 \item{title}{Character identifying the title of the plot. Leave NULL to choose interactively.}
 
-\item{dilution}{Numeric indicating the diltion of the input as a percentage. e.g. 1:10 = 10 (10%)}
+\item{dilution}{Numeric indicating the diltion of the input as a percentage. e.g. 1:10 = 10 (10 percent)}
 
 \item{delim}{Character indicating the delimiter in the 'Sample' column to separate conditions (entered first) and replicates (entered second). Leave NULL to choose interactively.}
 
