@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Kevin C.J. Nixon
 Maintainer: Kevin C.J. Nixon <Kevin.Nixon@uhnresearch.ca>
 Description: A package to analyze RT-qPCR data and plot relative gene expression.
-    At the moment, will perform ddCT method.
+    At the moment, will perform ddCT method and percent input.
 License: MIT
 Encoding: UTF-8
 LazyData: true
