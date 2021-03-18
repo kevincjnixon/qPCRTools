@@ -5,7 +5,7 @@
 #'
 #' @param infile Character indicating input file (raw from qPCR maching). Leave NULL to choose interactively.
 #' @param title Character identifying the title of the plot. Leave NULL to choose interactively.
-#' @param dilution Numeric indicating the diltion of the input as a percentage. e.g. 1:10 = 10 (10%)
+#' @param dilution Numeric indicating the diltion of the input as a percentage. e.g. 1:10 = 10 (10 percent)
 #' @param delim Character indicating the delimiter in the 'Sample' column to separate conditions (entered first) and replicates (entered second). Leave NULL to choose interactively.
 #' @param input Character indicating the input condition
 #' @param refCond Character indicating the control condition to use for normalization. Leave NULL to choose interactively.
