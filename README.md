@@ -36,6 +36,11 @@ When running interactively:
 Plot will be produced with showing conditions as colours on bars, plotting genes on x-axis and relative gene expression (delta-delta Ct method) on y-axis. Error bars are SEM (if showEB=T; default). Stats are from Benjamini-Hochberg-corrected pairwise-t-tests (if showStat=T; default).
 
 
+<img src="Figures/Example_ddCT.png" alt="Delta Delta CT plot"/>
+<p class="caption">
+  Delta delta CT plot
+  </p>
+
 Usage - Percent Input method
 *Note that this method at the moment does not assume biological replicates, and so no stats/error bars will appear on the graph*
 
@@ -60,6 +65,11 @@ When running interactively:
 12. Indicate if you want the results returned to the console (Y/N) (run as t<-easyPI() to save results as an R object 't')
 
 A plot will be produced shoing conditions as colours on bars, plotting the genes and IPs on the x-axis and percent input on the y-axis. At the moment, no error bars or stats will be provided.
+
+<img src="Figures/Example_PI.png" alt="Percent Input plot"/>
+<p class="caption">
+  Percent Input plot
+  </p>
 
 Setup for data input:
 Tab-delimited files output from qPCR machine.
