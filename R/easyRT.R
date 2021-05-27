@@ -19,7 +19,7 @@
 #' @export
 #'
 easyRT<-function(infile=NULL, title=NULL, refGene=NULL, delim=NULL, refCond=NULL,
-                 method="ddCt", std=NULL, avg=NULL, writeOut=NULL, col="Dark2",
+                 method="ddCt", std=NULL, avg=NULL, writeOut=NULL, bioRad=NULL, col="Dark2",
                  showStat=T, showEB=T){
   require(dplyr, quietly=T)
   #Check for the input file:
@@ -27,7 +27,10 @@ easyRT<-function(infile=NULL, title=NULL, refGene=NULL, delim=NULL, refCond=NULL
     infile<-file.choose()
   }
   dat<-NULL
-  form<-as.character(readline(prompt="Is this bioRad data without header? [Y/N]"))
+  form<-bioRad
+  if(is.null(bioRad)){
+    form<-as.character(readline(prompt="Is this bioRad data without header? [Y/N]"))
+  }
   if(form=="Y" || form=="y"){
     dat<-bioRadImport(infile)
   } else {
