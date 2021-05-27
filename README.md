@@ -9,6 +9,12 @@ Installation
 install.packages("devtools")
 devtools::install_github("kevincjnixon/qPCRTools")
 ```
+## New Shiny App User Interface
+Just run:
+```{r}
+RTUI()
+```
+Select your file and input some information and generate your plots!
 
 Usage - ddCt method
 
