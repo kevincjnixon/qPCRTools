@@ -12,7 +12,8 @@ devtools::install_github("kevincjnixon/qPCRTools")
 ## New Shiny App User Interface
 Just run:
 ```{r}
-RTUI()
+RTUI() #ddCT analysis
+PIUI() #Percent Input Analysis
 ```
 Select your file and input some information and generate your plots!
 
