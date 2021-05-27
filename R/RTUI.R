@@ -187,9 +187,14 @@ RTUI<-function(){
                             max = NA,
                             value = 0.3),
         # Radio buttons to determine if adjusted or raw p-value should be used
+        shiny::h4("Delimiter:"),
+        shiny::helpText("The character separating the condition",
+                        "from the replicate in the 'Sample' column",
+                        "(e.g. space, -, or _). Defaults to space."),
         shiny::textInput(inputId= "delim",
-                         label="Delimiter:",
+                         label=NULL,
                          value=" "),
+
 
         #Input: Numeric input for the
         shiny::uiOutput('condOpt'),
