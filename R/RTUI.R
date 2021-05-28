@@ -483,14 +483,14 @@ ui<-shiny::bootstrapPage(
                           label="Averaging method?",
                           choices=c("mean","geoMean"),
                           selected="mean"),
-      shiny::radioButtons(inputId="stat",
-                          label="Show statistics?",
-                          choices=c("Yes","No"),
-                          selected="Yes"),
-      shiny::radioButtons(inputId="eb",
-                          label="Show Error Bars?",
-                          choices=c("Yes","No"),
-                          selected="Yes"),
+      #shiny::radioButtons(inputId="stat",
+      #                    label="Show statistics?",
+      #                    choices=c("Yes","No"),
+      #                    selected="Yes"),
+      #shiny::radioButtons(inputId="eb",
+      #                    label="Show Error Bars?",
+      #                    choices=c("Yes","No"),
+      #                    selected="Yes"),
       #shiny::actionButton(inputId="button", label="Generate Plot!"),
       shiny::radioButtons(inputId="showTab",
                           label="Show Table:",
@@ -576,12 +576,12 @@ server<-function(input, output){
       }
       stat<-T
       eb<-T
-      if(input$stat=="No"){
-        stat<-F
-      }
-      if(input$eb=="No"){
-        eb<-F
-      }
+      #if(input$stat=="No"){
+      #  stat<-F
+      #}
+      #if(input$eb=="No"){
+      #  eb<-F
+      #}
       cf<-T
       if(input$condFirst=="No"){
         cf<-F
@@ -601,12 +601,12 @@ server<-function(input, output){
     }
     stat<-T
     eb<-T
-    if(input$stat=="No"){
-      stat<-F
-    }
-    if(input$eb=="No"){
-      eb<-F
-    }
+    #if(input$stat=="No"){
+    #  stat<-F
+    #}
+    #if(input$eb=="No"){
+    #  eb<-F
+    #}
     cf<-T
     if(input$condFirst=="No"){
       cf<-F
