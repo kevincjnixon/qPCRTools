@@ -117,7 +117,7 @@ RTshiny<-function(infile=NULL, title=NULL, refGene=NULL, delim=NULL, refCond=NUL
   pwc <- pwc %>% tibble::add_column(y=yvals)
   #Now we can run pairwise comparisons, normalize to control, and plot
   if(is.null(title)){
-    title<-as.character(readline(prompt="Enter a title for your plot: "))
+    #title<-as.character(readline(prompt="Enter a title for your plot: "))
   }
   p<-ggplot2::ggplot(x, ggplot2::aes(x=Detector,y=ddCt, fill=Condition))+
     ggplot2::geom_bar(stat="identity", color="black", position=ggplot2::position_dodge())+
@@ -134,26 +134,14 @@ RTshiny<-function(infile=NULL, title=NULL, refGene=NULL, delim=NULL, refCond=NUL
   }
   print(p + ggplot2::geom_hline(yintercept=1, linetype="dashed"))
   #return(res)
-  if(is.null(writeOut)){
-    #writeOut<-as.character(readline(prompt="Would you like to write the results out to csv? [Y/N]:"))
+  summ<-as.data.frame(x)
+  summ$pvalue<-rep(NA, nrow(summ))
+  summ$padj<-rep(NA, nrow(summ))
+  for(i in 1:nrow(pwc)){
+    summ$pvalue[i*2]<-pwc$p[i]
+    summ$padj[i*2]<-pwc$p.adj[i]
   }
-  if(writeOut=="Y" || writeOut=="y"){
-    #filename<-as.character(readline(prompt="Please enter a file name for the results (ending in .csv):"))
-    fe<-file.exists(filename)
-    while(isTRUE(fe)){
-      #message("File: ",filename," exists.")
-      #ow<-as.character(readline(prompt="Overwrite? [Y/N]"))
-      if(ow=="Y" || ow=="y"){
-        #message(filename, " will be overwritten...")
-        fe<-F
-      } else {
-        #filename<-as.character(readline(prompt="Please enter a different filename (.csv):"))
-        fe<-file.exists(filename)
-      }
-    }
-    #message("Writing results to ", filename,"...")
-    write.csv(x, filename, row.names=F, quote=F)
-  }
+  return(summ)
 }
 
 PIshiny<-function(infile=NULL, title=NULL, dilution=NULL, delim=NULL, input=NULL, refCond=NULL,
@@ -252,33 +240,14 @@ PIshiny<-function(infile=NULL, title=NULL, dilution=NULL, delim=NULL, input=NULL
     ggplot2::scale_fill_brewer(palette=col)
 
   print(p)
-  # #return(res)
-  # if(is.null(writeOut)){
-  #  # writeOut<-as.character(readline(prompt="Would you like to write the results out to csv? [Y/N]:"))
-  # }
-  # if(writeOut=="Y" || writeOut=="y"){
-  #   #filename<-as.character(readline(prompt="Please enter a file name for the results (ending in .csv):"))
-  #   fe<-file.exists(filename)
-  #   while(isTRUE(fe)){
-  #     #message("File: ",filename," exists.")
-  #     #ow<-as.character(readline(prompt="Overwrite? [Y/N]"))
-  #     if(ow=="Y" || ow=="y"){
-  #       #message(filename, " will be overwritten...")
-  #       fe<-F
-  #     } else {
-  #       #filename<-as.character(readline(prompt="Please enter a different filename (.csv):"))
-  #       #fe<-file.exists(filename)
-  #     }
-  #   }
-  #   #message("Writing results to ", filename,"...")
-  #   #write.csv(x, filename, row.names=F, quote=F)
-  # }
-  # if(is.null(returnDat)){
-  #   #returnDat<-as.character(readline(prompt="Would you like to print results to the console? [Y/N]:"))
-  # }
-  # if(returnDat=="Y" || returnDat=="y"){
-  #   return(x)
-  # }
+  summ<-as.data.frame(x)
+  #summ$pvalue<-rep(NA, nrow(summ))
+  #summ$padj<-rep(NA, nrow(summ))
+  #for(i in 1:nrow(pwc)){
+  #  summ$pvalue[i*2]<-pwc$p[i]
+  #  summ$padj[i*2]<-pwc$p.adj[i]
+  #}
+  return(summ)
 }
 
 
@@ -341,7 +310,11 @@ RTUI<-function(){
                             label="Show Error Bars?",
                             choices=c("Yes","No"),
                             selected="Yes"),
-        shiny::actionButton(inputId="button", label="Generate Plot!")
+        #shiny::actionButton(inputId="button", label="Generate Plot!"),
+        shiny::radioButtons(inputId="showTab",
+                            label="Show Table:",
+                            choices=c("Raw data","Processed Data"),
+                            selected="Raw data")
       ),
 
       # Main panel for displaying outputs ----
@@ -402,11 +375,9 @@ RTUI<-function(){
                   selected=opt[1])
     })
     output$tab<-shiny::renderDataTable({
-      data()
-    })
-    shiny::observeEvent(input$button, {
-
-      output$ddCt<-shiny::renderPlot({
+      if(input$showTab=="Raw data"){
+        data()
+      } else {
         br<-"N"
         if(input$bioRad == "Yes"){
           br<-"Y"
@@ -423,7 +394,25 @@ RTUI<-function(){
         RTshiny(infile=fn, title=input$title, refGene=input$refGene,
                 delim=input$delim, refCond=input$refCond, std=input$std, avg=input$avg,
                 writeOut="N", bioRad=br, showStat=stat, showEB=eb)
-      })
+      }
+    })
+    output$ddCt<-shiny::renderPlot({
+      br<-"N"
+      if(input$bioRad == "Yes"){
+        br<-"Y"
+      }
+      stat<-T
+      eb<-T
+      if(input$stat=="No"){
+        stat<-F
+      }
+      if(input$eb=="No"){
+        eb<-F
+      }
+      fn<-filename()
+      RTshiny(infile=fn, title=input$title, refGene=input$refGene,
+              delim=input$delim, refCond=input$refCond, std=input$std, avg=input$avg,
+              writeOut="N", bioRad=br, showStat=stat, showEB=eb)
     })
   }
   shiny::shinyApp(ui = ui, server = server)
@@ -500,7 +489,11 @@ ui<-shiny::bootstrapPage(
                           label="Show Error Bars?",
                           choices=c("Yes","No"),
                           selected="Yes"),
-      shiny::actionButton(inputId="button", label="Generate Plot!")
+      #shiny::actionButton(inputId="button", label="Generate Plot!"),
+      shiny::radioButtons(inputId="showTab",
+                          label="Show Table:",
+                          choices=c("Raw data", "Processed data"),
+                          selected="Raw data")
     ),
 
     # Main panel for displaying outputs ----
@@ -572,11 +565,9 @@ server<-function(input, output){
                 selected=opt[1])
   })
   output$tab<-shiny::renderDataTable({
-    data()
-  })
-  shiny::observeEvent(input$button, {
-
-    output$piFig<-shiny::renderPlot({
+    if(input$showTab=="Raw data"){
+      data()
+    } else {
       br<-"N"
       if(input$bioRad == "Yes"){
         br<-"Y"
@@ -599,7 +590,31 @@ server<-function(input, output){
       PIshiny(infile=fn, title=input$title, input=input$IPref, dilution=input$dilution,
               delim=input$delim, refCond=input$refCond, std=input$std, avg=input$avg,
               writeOut="N", bioRad=br, showStat=stat, showEB=eb, condFirst=cf)
-    })
+    }
+  })
+  output$piFig<-shiny::renderPlot({
+    br<-"N"
+    if(input$bioRad == "Yes"){
+      br<-"Y"
+    }
+    stat<-T
+    eb<-T
+    if(input$stat=="No"){
+      stat<-F
+    }
+    if(input$eb=="No"){
+      eb<-F
+    }
+    cf<-T
+    if(input$condFirst=="No"){
+      cf<-F
+    }
+    fn<-filename()
+    print(c(fn, input$title, input$IPref, input$dilution, input$delim, input$refCond, input$std, input$avg,
+            br, stat, eb, cf))
+    PIshiny(infile=fn, title=input$title, input=input$IPref, dilution=input$dilution,
+            delim=input$delim, refCond=input$refCond, std=input$std, avg=input$avg,
+            writeOut="N", bioRad=br, showStat=stat, showEB=eb, condFirst=cf)
   })
 }
 shiny::shinyApp(ui = ui, server = server)
