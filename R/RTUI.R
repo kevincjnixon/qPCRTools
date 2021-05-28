@@ -1,7 +1,7 @@
 #' easyRT for Shiny App
 RTshiny<-function(infile=NULL, title=NULL, refGene=NULL, delim=NULL, refCond=NULL,
-                  method="ddCt", std=NULL, avg=NULL, writeOut=NULL, col="Dark2",
-                  showStat=T, showEB=T, bioRad=NULL){
+                  method="ddCt", std=NULL, avg=NULL, col="Dark2",
+                  showStat=T, showEB=T, bioRad=NULL, returnDat=F){
   require(dplyr, quietly=T)
   #Check for the input file:
   if(is.null(infile)){
@@ -134,14 +134,16 @@ RTshiny<-function(infile=NULL, title=NULL, refGene=NULL, delim=NULL, refCond=NUL
   }
   print(p + ggplot2::geom_hline(yintercept=1, linetype="dashed"))
   #return(res)
-  summ<-as.data.frame(x)
-  summ$pvalue<-rep(NA, nrow(summ))
-  summ$padj<-rep(NA, nrow(summ))
-  for(i in 1:nrow(pwc)){
-    summ$pvalue[i*2]<-pwc$p[i]
-    summ$padj[i*2]<-pwc$p.adj[i]
+  if(isTRUE(returnDat)){
+    summ<-as.data.frame(x)
+    summ$pvalue<-rep(NA, nrow(summ))
+    summ$padj<-rep(NA, nrow(summ))
+    for(i in 1:nrow(pwc)){
+      summ$pvalue[i*2]<-pwc$p[i]
+      summ$padj[i*2]<-pwc$p.adj[i]
+    }
+    return(summ)
   }
-  return(summ)
 }
 
 PIshiny<-function(infile=NULL, title=NULL, dilution=NULL, delim=NULL, input=NULL, refCond=NULL,
@@ -393,7 +395,7 @@ RTUI<-function(){
         fn<-filename()
         RTshiny(infile=fn, title=input$title, refGene=input$refGene,
                 delim=input$delim, refCond=input$refCond, std=input$std, avg=input$avg,
-                writeOut="N", bioRad=br, showStat=stat, showEB=eb)
+                returnDat=T, bioRad=br, showStat=stat, showEB=eb)
       }
     })
     output$ddCt<-shiny::renderPlot({
@@ -412,7 +414,7 @@ RTUI<-function(){
       fn<-filename()
       RTshiny(infile=fn, title=input$title, refGene=input$refGene,
               delim=input$delim, refCond=input$refCond, std=input$std, avg=input$avg,
-              writeOut="N", bioRad=br, showStat=stat, showEB=eb)
+              returnDat=F, bioRad=br, showStat=stat, showEB=eb)
     })
   }
   shiny::shinyApp(ui = ui, server = server)
